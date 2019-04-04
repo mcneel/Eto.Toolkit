@@ -71,12 +71,22 @@ namespace Eto.CodeEditor
             set => Handler.FontSize = value;
         }
 
+        public bool ReadOnly
+        {
+            get => Handler.ReadOnly;
+            set => Handler.ReadOnly = value;
+        }
+
         public int LineNumberColumnWidth
         {
             get => Handler.LineNumberColumnWidth;
             set => Handler.LineNumberColumnWidth = value;
         }
 
+        public void SetBackgroundGray()
+        {
+            Handler.SetBackgroundGray();
+        }
         public void SetColor(Section section, Eto.Drawing.Color foreground, Eto.Drawing.Color background)
         {
             Handler.SetColor(section, foreground, background);
@@ -129,7 +139,10 @@ namespace Eto.CodeEditor
             void SetProgrammingLanguage(ProgrammingLanguage language, string[] keywordSets);
             string FontName { get; set; }
             int FontSize { get; set; }
+            bool ReadOnly { get; set; }
             int LineNumberColumnWidth { get; set; }
+
+            void SetBackgroundGray();
             void SetColor(Section section, Eto.Drawing.Color foreground, Eto.Drawing.Color background);
 
             void SetupIndicatorStyles();

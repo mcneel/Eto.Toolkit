@@ -69,6 +69,9 @@ namespace Eto.CodeEditor.XamMac2
                 case ProgrammingLanguage.Python:
                     which = ScintillaNET.NativeMethods.SCLEX_PYTHON;
                     break;
+                case ProgrammingLanguage.None:
+                    which = ScintillaNET.NativeMethods.SCLEX_CONTAINER;
+                    break;
             }
             Control.SetGeneralProperty(ScintillaNET.NativeMethods.SCI_SETLEXER, which, 0);
 
@@ -106,6 +109,18 @@ namespace Eto.CodeEditor.XamMac2
             }
         }
 
+        public bool ReadOnly
+        {
+            get
+            {
+                return (int)Control.GetGeneralProperty(ScintillaNET.NativeMethods.SCI_GETREADONLY, ScintillaNET.NativeMethods.STYLE_DEFAULT) == 0 ? false: true;
+            }
+            set
+            {
+                Control.SetGeneralProperty(ScintillaNET.NativeMethods.SCI_SETREADONLY, value ? 1 : 0);
+            }
+        }
+
         public int LineNumberColumnWidth
         {
             get
@@ -116,6 +131,12 @@ namespace Eto.CodeEditor.XamMac2
             {
                 Control.SetGeneralProperty(NativeMethods.SCI_SETMARGINWIDTHN, 0, value);
             }
+        }
+
+        public void SetBackgroundGray()
+        {
+            Control.SetColorProperty(NativeMethods.SCI_STYLESETBACK, NativeMethods.STYLE_DEFAULT, Eto.Drawing.Colors.LightGrey.ToHex(false));
+            Control.SetColorProperty(NativeMethods.SCI_STYLESETBACK, NativeMethods.SCE_C_DEFAULT, Eto.Drawing.Colors.LightGrey.ToHex(false));
         }
 
         public void SetColor(Section section, Eto.Drawing.Color foreground, Eto.Drawing.Color background)
