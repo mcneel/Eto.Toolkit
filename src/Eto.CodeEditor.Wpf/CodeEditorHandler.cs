@@ -501,7 +501,7 @@ namespace Eto.CodeEditor.Wpf
             //scintilla.IndicatorCurrent = TypeNameIndex;
             scintilla.DirectMessage(NativeMethods.SCI_SETINDICATORCURRENT, new IntPtr(TypeNameIndex));
             //scintilla.IndicatorFillRange(position, length);
-            scintilla.DirectMessage(NativeMethods.SCI_INDICATORFILLRANGE, new IntPtr(position), new IntPtr(length))
+            scintilla.DirectMessage(NativeMethods.SCI_INDICATORFILLRANGE, new IntPtr(position), new IntPtr(length));
         }
 
         public int LineNumberColumnWidth
