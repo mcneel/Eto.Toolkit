@@ -37,6 +37,11 @@ namespace Eto.CodeEditor.Wpf
             }
         }
 
+        public ScintillaControl()
+        {
+            // pass
+            Console.WriteLine("here");
+        }
 
         internal IntPtr DirectMessage(int msg)
         {
@@ -73,6 +78,8 @@ namespace Eto.CodeEditor.Wpf
                 if (moduleHandle == IntPtr.Zero)
                 {
                     var path = UnpackNativeScintilla(); // GetModulePath();
+                    //var path = @"C:\Users\alain\src\Eto.Toolkit\artifacts\core\Debug\SciLexer.dll";
+                    //path = @"C:\Users\alain\src\Eto.Toolkit\src\Eto.CodeEditor.Wpf\scintilla\x64\SciLexer.dll";
 
                     // Load the native Scintilla library
                     moduleHandle = NativeMethods.LoadLibrary(path);
@@ -97,7 +104,7 @@ namespace Eto.CodeEditor.Wpf
                 }
 
                 CreateParams cp = base.CreateParams;
-                cp.ClassName = "Scintilla";
+                cp.ClassName = "ScintillaControl";
 
                 // The border effect is achieved through a native Windows style
                 cp.ExStyle &= (~NativeMethods.WS_EX_CLIENTEDGE);
