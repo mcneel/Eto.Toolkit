@@ -41,7 +41,7 @@ namespace Eto.CodeEditor.Wpf
             scintilla.DirectMessage(NativeMethods.SCI_AUTOCSETMAXHEIGHT, new IntPtr(10));
             //scintilla.AutomaticFold = AutomaticFold.Click;
             scintilla.DirectMessage(NativeMethods.SCI_SETAUTOMATICFOLD, new IntPtr(NativeMethods.SC_AUTOMATICFOLD_CLICK));
-
+            
             FontName = "Consolas";
             FontSize = 11;
             LineNumberColumnWidth = 40;
