@@ -5,11 +5,13 @@ using ScintillaNET;
 using System.Globalization;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using Scintilla;
 
 namespace Eto.CodeEditor.Wpf
 {
     public class ScintillaControl : Control
     {
+        private SciX scix;
         private static IntPtr moduleHandle;
         private IntPtr sciPtr;
         private BorderStyle borderStyle;
@@ -39,33 +41,42 @@ namespace Eto.CodeEditor.Wpf
 
         public ScintillaControl()
         {
-            // pass
-            Console.WriteLine("here");
+            base.SetStyle(ControlStyles.UserPaint, false);
+            CreateHandle();
+            scix = new SciX { DirectFunction = directFunction, ScintillaHandle = SciPointer };
+        }
+
+        public unsafe override string Text
+        {
+            get => scix.Text;
+            set => scix.Text = value;
         }
 
         internal IntPtr DirectMessage(int msg)
         {
-            return DirectMessage(msg, IntPtr.Zero, IntPtr.Zero);
+            //return DirectMessage(msg, IntPtr.Zero, IntPtr.Zero);
+            return scix.DirectMessage(msg, IntPtr.Zero, IntPtr.Zero);
         }
 
         internal IntPtr DirectMessage(int msg, IntPtr wParam)
         {
-            return DirectMessage(msg, wParam, IntPtr.Zero);
+            //return DirectMessage(msg, wParam, IntPtr.Zero);
+            return scix.DirectMessage(msg, wParam, IntPtr.Zero);
         }
 
         public virtual IntPtr DirectMessage(int msg, IntPtr wParam, IntPtr lParam)
         {
             // If the control handle, ptr, direct function, etc... hasn't been created yet, it will be now.
-            var result = DirectMessage(SciPointer, msg, wParam, lParam);
+            var result = scix.DirectMessage(SciPointer, msg, wParam, lParam);
             return result;
         }
 
-        private static IntPtr DirectMessage(IntPtr sciPtr, int msg, IntPtr wParam, IntPtr lParam)
-        {
-            // Like Win32 SendMessage but directly to Scintilla
-            var result = directFunction(sciPtr, msg, wParam, lParam);
-            return result;
-        }
+        //private static IntPtr DirectMessage(IntPtr sciPtr, int msg, IntPtr wParam, IntPtr lParam)
+        //{
+        //    // Like Win32 SendMessage but directly to Scintilla
+        //    var result = directFunction(sciPtr, msg, wParam, lParam);
+        //    return result;
+        //}
 
         /// <summary>
         /// Gets the required creation parameters when the control handle is created.
@@ -104,7 +115,8 @@ namespace Eto.CodeEditor.Wpf
                 }
 
                 CreateParams cp = base.CreateParams;
-                cp.ClassName = "ScintillaControl";
+                //cp.ClassName = "ScintillaControl";
+                cp.ClassName = "Scintilla";
 
                 // The border effect is achieved through a native Windows style
                 cp.ExStyle &= (~NativeMethods.WS_EX_CLIENTEDGE);
