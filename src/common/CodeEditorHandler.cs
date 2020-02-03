@@ -156,6 +156,24 @@ namespace Eto.CodeEditor
         {
             scintilla.AutoCompleteShow(lenEntered, list);
         }
+
+        public event EventHandler<CharAddedEventArgs> CharAdded
+        {
+            add { scintilla.CharAdded += value; }
+            remove { scintilla.CharAdded -= value; }
+        }
+
+        public event EventHandler<EventArgs> TextChanged
+        {
+            add { scintilla.TextChanged += value; }
+            remove { scintilla.TextChanged -= value; }
+        }
+
+        public event EventHandler<BreakpointsChangedEventArgs> BreakpointsChanged
+        {
+            add { scintilla.BreakpointsChanged += value; }
+            remove { scintilla.BreakpointsChanged -= value; }
+        }
         #endregion
     }
 }

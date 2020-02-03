@@ -31,7 +31,7 @@ namespace Eto.CodeEditor
 
             /*scintilla*/this.CharAdded += WinFormsControl_CharAdded;
             scintilla.TextChanged += WinFormsControl_TextChanged;
-            /*scintilla.*/this.InsertCheck += WinFormsControl_InsertCheck;
+            //InsertCheck += WinFormsControl_InsertCheck;
             //scintilla.AutoCMaxHeight = 10;
             scintilla.DirectMessage(NativeMethods.SCI_AUTOCSETMAXHEIGHT, new IntPtr(10));
             //scintilla.AutomaticFold = AutomaticFold.Click;
@@ -42,17 +42,17 @@ namespace Eto.CodeEditor
             LineNumberColumnWidth = 40;
         }
 
-        private void WinFormsControl_InsertCheck(object sender, /*ScintillaNET.*/InsertCheckEventArgs e)
-        {
-            InsertCheck?.Invoke(this, new Eto.CodeEditor.InsertCheckEventArgs(e.Text));
-        }
+        //private void WinFormsControl_InsertCheck(object sender, /*ScintillaNET.*/InsertCheckEventArgs e)
+        //{
+        //    InsertCheck?.Invoke(this, new Eto.CodeEditor.InsertCheckEventArgs(e.Text));
+        //}
 
-        public void ChangeInsertion(string text)
-        {
-            // this method shouldn't be part of the handler interface as it's not needed on windows.
-            // on windows the handler set `e.Text = "some text"` and the setter calls the native ChangeInsertion
-            throw new NotImplementedException("InsertCheck handler needs to be reworked.");
-        }
+        //public void ChangeInsertion(string text)
+        //{
+        //    // this method shouldn't be part of the handler interface as it's not needed on windows.
+        //    // on windows the handler set `e.Text = "some text"` and the setter calls the native ChangeInsertion
+        //    throw new NotImplementedException("InsertCheck handler needs to be reworked.");
+        //}
 
         private void WinFormsControl_CharAdded(object sender, /*ScintillaNET.*/CharAddedEventArgs e)
         {
@@ -65,10 +65,10 @@ namespace Eto.CodeEditor
 
         }
 
-        public event EventHandler<Eto.CodeEditor.CharAddedEventArgs> CharAdded;
-        //public event EventHandler<Eto.CodeEditor.TextChangedEventArgs> TextChanged;
-        public event EventHandler<EventArgs> TextChanged;
-        public event EventHandler<Eto.CodeEditor.InsertCheckEventArgs> InsertCheck;
+        //public event EventHandler<Eto.CodeEditor.CharAddedEventArgs> CharAdded;
+        ////public event EventHandler<Eto.CodeEditor.TextChangedEventArgs> TextChanged;
+        //public event EventHandler<EventArgs> TextChanged;
+        //public event EventHandler<Eto.CodeEditor.InsertCheckEventArgs> InsertCheck;
 
         Encoding Encoding
         {

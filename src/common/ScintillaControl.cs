@@ -249,6 +249,8 @@ namespace Scintilla
             BreakpointsChanged?.Invoke(this, new BreakpointsChangedEventArgs(BreakpointChangeType.Clear));
         }
 
+        public event EventHandler<CharAddedEventArgs> CharAdded;
+        public new event EventHandler<EventArgs> TextChanged; // hides inherited TextChanged
         public event EventHandler<BreakpointsChangedEventArgs> BreakpointsChanged;
 
         public void SetColor(Section section, Eto.Drawing.Color foreground, Eto.Drawing.Color background)
