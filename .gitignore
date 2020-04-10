@@ -5,3 +5,5 @@ UpgradeLog*.htm
 bin/
 obj/
 *.user
+lib/scintilla/hg-clone
+
