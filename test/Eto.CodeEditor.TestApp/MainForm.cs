@@ -6,6 +6,7 @@ namespace Eto.CodeEditor.TestApp
 {
     public class MainForm : Form
     {
+        private FontDialog fd;
         public MainForm()
         {
             Title = $"CodeEditor Test, Platform: {Platform.ID}";
@@ -29,23 +30,23 @@ for( int i=0; i<10; i++ )
             var btn = new Button { Text = "Font" };
             btn.Click += (s, e) =>
             {
+                fd = new FontDialog();
                 var originalFont = editor.Font ?? SystemFonts.Default();
-                pp(originalFont, "first");
-                var fd = new Eto.Forms.FontDialog { Font = originalFont };
+                pp(originalFont, "original");
+                fd.Font = originalFont;
                 fd.FontChanged += (ss, ee) =>
                 {
                     editor.Font = fd.Font;
                     pp(editor.Font, "FontChanged");
                 };
                 var r = fd.ShowDialog(this);
+
+                // on windows
                 editor.Font = (r == DialogResult.Ok || r == DialogResult.Yes)
                   ? fd.Font
                   : originalFont;
 
                 pp(fd.Font, "fd");
-                pp(editor.Font, "editor");
-                //editor.ShowWhitespaceWithColor(Colors.Red);
-                //editor.Text = $"name: {editor.FontName}, size: {editor.FontSize}";
             };
             Content = new TableLayout { Rows = { btn, editor } };
         }
