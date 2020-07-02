@@ -52,6 +52,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eto.UnitTest.Desktop", "Eto
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Eto.CodeEditor.Wpf", "Eto.CodeEditor.Wpf\Eto.CodeEditor.Wpf.csproj", "{60C90DC5-E674-4368-9DC5-9734D215588D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompilerServices", "CompilerServices\CompilerServices.csproj", "{E92CFED2-2342-4B4C-8521-873842135C63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mac = Debug|Mac
@@ -182,6 +184,14 @@ Global
 		{60C90DC5-E674-4368-9DC5-9734D215588D}.Release|Mac.ActiveCfg = Release|Any CPU
 		{60C90DC5-E674-4368-9DC5-9734D215588D}.Release|Windows.ActiveCfg = Release|Any CPU
 		{60C90DC5-E674-4368-9DC5-9734D215588D}.Release|Windows.Build.0 = Release|Any CPU
+		{E92CFED2-2342-4B4C-8521-873842135C63}.Debug|Mac.ActiveCfg = Debug|Any CPU
+		{E92CFED2-2342-4B4C-8521-873842135C63}.Debug|Mac.Build.0 = Debug|Any CPU
+		{E92CFED2-2342-4B4C-8521-873842135C63}.Debug|Windows.ActiveCfg = Debug|Any CPU
+		{E92CFED2-2342-4B4C-8521-873842135C63}.Debug|Windows.Build.0 = Debug|Any CPU
+		{E92CFED2-2342-4B4C-8521-873842135C63}.Release|Mac.ActiveCfg = Release|Any CPU
+		{E92CFED2-2342-4B4C-8521-873842135C63}.Release|Mac.Build.0 = Release|Any CPU
+		{E92CFED2-2342-4B4C-8521-873842135C63}.Release|Windows.ActiveCfg = Release|Any CPU
+		{E92CFED2-2342-4B4C-8521-873842135C63}.Release|Windows.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -79,6 +79,14 @@ for( int i=0; i<10; i++ )
                 Panel2 = new Splitter { Panel1 = editor, Panel2 = ta, Orientation = Orientation.Vertical, Panel1MinimumSize = 100, FixedPanel = SplitterFixedPanel.Panel2 }
             };
             Content = new TableLayout { Rows = { splitter } };
+
+            editor.CharAdded += Editor_CharAdded;
+        }
+
+        private void Editor_CharAdded(object sender, CharAddedEventArgs e)
+        {
+            var ed = sender as CodeEditor;
+
         }
     }
 }

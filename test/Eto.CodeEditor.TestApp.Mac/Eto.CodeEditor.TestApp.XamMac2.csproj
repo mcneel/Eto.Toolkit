@@ -4,6 +4,7 @@
     <UseXamarinMac>True</UseXamarinMac>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net461</TargetFrameworks>
+    <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
