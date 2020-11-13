@@ -40,8 +40,10 @@ namespace Eto.CodeEditor
         }
 
         public void KeyPressedInCallTips(char key) {
+          logger?.Invoke($"KeyPressedInCallTips TOP. key: {key}");
           if (key == ',')
           {
+            logger?.Invoke($"KeyPressidInCallTips: char:{key}");
             if (signatures?.CurrentSignatureCurrentParameterindexsTrySetNext() ?? false)
             {
               var t = signatures.CurrentSignatureCurrentParameterIndexes;
