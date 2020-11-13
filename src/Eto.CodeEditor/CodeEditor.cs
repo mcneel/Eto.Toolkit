@@ -32,6 +32,13 @@ namespace Eto.CodeEditor
           }
         }
 
+        private void CodeEditor_KeyDown(Object sender, KeyEventArgs e)
+        {
+            if (CallTipIsActive && (e.Key == Keys.Up || e.Key == Keys.Down)) {
+                logger?.Invoke("TODO: implement CodeEditor_KeyDown handler");
+            }
+        }
+
         public void KeyPressedInCallTips(char key) {
           if (key == ',')
           {
@@ -78,36 +85,37 @@ namespace Eto.CodeEditor
             }
         }
 
+        private void Handler_CallTipClicked(Object sender, CallTipClickedEventArgs e)
+        {
+          logger?.Invoke($"ctclicked: {e.Move}");
+          if (e.Move == CallTipMove.Current)
+            return;
+          if (e.Move == CallTipMove.Next)
+            signatures?.SetNextAsCurrent();
+          else
+            signatures?.SetPreviousAsCurrent();
+          CallTipCancel();
+          CallTipsShow(CurrentPosition, signatures.CurrentSignatureDisplay);
+          if (!(signatures?.CurrentSignatureHasNoParameters ?? true))
+          {
+            var t = signatures.CurrentSignatureCurrentParameterIndexes;
+            var pfxLen = signatures.DisplayPrefix.Length;
+            logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
+            CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
+          }
+        }
+
         readonly ProgrammingLanguage _language;
         public CodeEditor(ProgrammingLanguage language, bool darkMode=false, 
             Func<string, int, char, Task<List<string>>> getCompletions = null,
             Action<string> logger = null)
         {
+            CallTipClicked += Handler_CallTipClicked;
+
             if (getCompletions != null)
             {
                 // todo: the rest of this 'if' block assumes C#
                 GetCompletions = getCompletions;
-
-                CallTipClicked += (s, e) =>
-                {
-                  logger?.Invoke($"ctclicked: {e.Move}");
-                  if (e.Move == CallTipMove.Current)
-                    return;
-                  if (e.Move == CallTipMove.Next)
-                    signatures?.SetNextAsCurrent();
-                  else
-                    signatures?.SetPreviousAsCurrent();
-                  CallTipCancel();
-                  CallTipsShow(CurrentPosition, signatures.CurrentSignatureDisplay);
-                  if (!(signatures?.CurrentSignatureHasNoParameters ?? true))
-                  {
-                    var t = signatures.CurrentSignatureCurrentParameterIndexes;
-                    var pfxLen = signatures.DisplayPrefix.Length;
-                    logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
-                    CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
-                  }
-                };
-
 
                 CharAdded += async (s, e) =>
                 {
