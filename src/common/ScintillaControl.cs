@@ -341,7 +341,12 @@ namespace Scintilla
         }
 
         public event EventHandler<CharAddedEventArgs> CharAdded;
+        
+        // The 'new' keyword is not required on macos because there TextChanged does not hide an accessible member bu it is required on Windows.
+#pragma warning disable CS0109
         public new event EventHandler<EventArgs> TextChanged; // hides inherited TextChanged
+#pragma warning restore CS0109
+
         public event EventHandler<CallTipClickedEventArgs> CallTipClicked;
         public event EventHandler<SelectionChangedEventArgs> SelectionChanged;
         public event EventHandler<BreakpointsChangedEventArgs> BreakpointsChanged;
