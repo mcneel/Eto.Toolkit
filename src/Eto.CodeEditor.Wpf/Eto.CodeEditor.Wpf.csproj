@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\common\*.cs" Link="common\%(Filename)%(Extension)" />
+    <Compile Include="..\Eto.CodeEditor.Common\linked\*.cs" Link="linked\%(Filename)%(Extension)" />
     <EmbeddedResource Include="scintilla\x64\SciLexer.dll" />
     <None Remove="scintilla\x64\SciLexer.dll" />
   </ItemGroup>
