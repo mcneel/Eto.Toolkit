@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>Debug;Release;Debug-Ed.TestApp.Wpf;Debug32</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="api\Workspace\IWorkspace.cs" />
+    <Compile Remove="TextDocument.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\index-blank.html" />
+    <None Remove="wwwroot\index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\**\*">
+      <!--<LogicalName>$([System.IO.Path]::GetFullPath('%(Identity)'))</LogicalName>-->
+      <LogicalName>wwwroot\%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+  </ItemGroup>
+
+  <!--
+  <ItemGroup>
+    <None Update="wwwroot\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  -->
+
+</Project>

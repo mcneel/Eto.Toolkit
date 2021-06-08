@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Eto.Forms" Version="2.5.10" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\Eto.Toolkit\src\Eto.UnitTest.NUnit\Eto.UnitTest.NUnit.csproj" />
+    <ProjectReference Include="..\CSharpCompletionProvider\CSharpCompletionProvider.csproj" />
+    <ProjectReference Include="..\Ed.Eto\Ed.Eto.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="RhinoCommon">
+      <HintPath>..\..\..\mcneel.com\rhino7\src4\bin\Debug\RhinoCommon.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

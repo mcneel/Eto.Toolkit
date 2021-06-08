@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\Eto\src\Eto.Wpf\Eto.Wpf.csproj" />
+    <ProjectReference Include="..\Ed.Eto.TestApp\Ed.Eto.TestApp.csproj" />
+    <ProjectReference Include="..\Ed.Eto.Wpf\Ed.Eto.Wpf.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Eto.Platform.Wpf" Version="2.5.10" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.818.41" />
+  </ItemGroup>
+
+</Project>

@@ -8,190 +8,215 @@ using System.Threading.Tasks;
 namespace Eto.CodeEditor
 {
     [Handler(typeof(IHandler))]
-    public class CodeEditor : Control
+    public class CodeEditor : WebView
     {
         private Action<string> logger = null;
-        private Func<string, int, char, Task<List<string>>> GetCompletions;
+        //private Func<string, int, char, Task<List<string>>> GetCompletions;
 
-        private Signatures signatures;
-        public void ResetCallTipsAndSignatures(List<string> signatureList = null)
+        //private Signatures signatures;
+        //public void ResetCallTipsAndSignatures(List<string> signatureList = null)
+        //{
+        //  CallTipCancel();
+        //  signatures = null;
+        //  
+        //  if(signatureList != null) {
+        //    signatures = new Signatures(signatureList, logger);
+        //    CallTipsShow(CurrentPosition, signatures.CurrentSignatureDisplay);
+        //    if (!signatures.CurrentSignatureHasNoParameters)
+        //    {
+        //      var t = signatures.CurrentSignatureCurrentParameterIndexes;
+        //      var pfxLen = signatures.DisplayPrefix.Length;
+        //      //logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
+        //      CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
+        //    }
+        //  }
+        //}
+
+        //private void CodeEditor_KeyDown(Object sender, KeyEventArgs e)
+        //{
+        //    if (CallTipIsActive && (e.Key == Keys.Up || e.Key == Keys.Down)) {
+        //        logger?.Invoke("TODO: implement CodeEditor_KeyDown handler");
+        //    }
+        //}
+
+        //public void KeyPressedInCallTips(char key) {
+        //  logger?.Invoke($"KeyPressedInCallTips TOP. key: {key}");
+        //  if (key == ',')
+        //  {
+        //    logger?.Invoke($"KeyPressidInCallTips: char:{key}");
+        //    if (signatures?.CurrentSignatureCurrentParameterindexsTrySetNext() ?? false)
+        //    {
+        //      var t = signatures.CurrentSignatureCurrentParameterIndexes;
+        //      var pfxLen = signatures.DisplayPrefix.Length;
+        //      logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
+        //      CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
+        //    }
+        //  }
+        //  if (key == ')')
+        //    ResetCallTipsAndSignatures();
+        //}
+
+        //static string[] GetKeywords(ProgrammingLanguage language)
+        //{
+        //    switch (language)
+        //    {
+        //        case ProgrammingLanguage.CSharp:
+        //            return new string[]
+        //            {
+        //            "abstract as base break case catch checked continue default delegate do else event explicit extern false finally fixed for foreach goto if implicit in interface internal is lock namespace new null object operator out override params private protected public readonly ref return sealed sizeof stackalloc switch this throw true try typeof unchecked unsafe using virtual while",
+        //            "bool byte char class const decimal double enum float int long sbyte short static string struct uint ulong ushort void"
+        //            };
+        //        case ProgrammingLanguage.GLSL:
+        //            {
+        //                LanguageGlsl.GetKeywords(out string k, out string f);
+        //                return new string[] { k, f };
+        //            }
+        //        case ProgrammingLanguage.Python:
+        //            return new string[]
+        //            {
+        //                "and as assert break class continue def del elif else except exec finally for from global if import in is lambda not or pass print raise return try while with yield",
+        //                "None is not def"
+        //            };
+        //        case ProgrammingLanguage.VB:
+        //            {
+        //                LanguageVbNet.GetKeywords(out string k, out string f);
+        //                return new string[] { k, f };
+        //            }
+        //        default:
+        //            return new string[0];
+        //    }
+        //}
+
+        //private void Handler_CallTipClicked(Object sender, CallTipClickedEventArgs e)
+        //{
+        //  logger?.Invoke($"ctclicked: {e.Move}");
+        //  if (e.Move == CallTipMove.Current)
+        //    return;
+        //  if (e.Move == CallTipMove.Next)
+        //    signatures?.SetNextAsCurrent();
+        //  else
+        //    signatures?.SetPreviousAsCurrent();
+        //  CallTipCancel();
+        //  CallTipsShow(CurrentPosition, signatures.CurrentSignatureDisplay);
+        //  if (!(signatures?.CurrentSignatureHasNoParameters ?? true))
+        //  {
+        //    var t = signatures.CurrentSignatureCurrentParameterIndexes;
+        //    var pfxLen = signatures.DisplayPrefix.Length;
+        //    logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
+        //    CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
+        //  }
+        //}
+
+        //readonly ProgrammingLanguage _language;
+
+        public event EventHandler<EventArgs> EditorHasBeenInitialized;
+        public bool EditorIsInitialized { get; private set; }
+        private void OnEditorHasBeenInitialized(EventArgs e)
         {
-          CallTipCancel();
-          signatures = null;
-          
-          if(signatureList != null) {
-            signatures = new Signatures(signatureList, logger);
-            CallTipsShow(CurrentPosition, signatures.CurrentSignatureDisplay);
-            if (!signatures.CurrentSignatureHasNoParameters)
-            {
-              var t = signatures.CurrentSignatureCurrentParameterIndexes;
-              var pfxLen = signatures.DisplayPrefix.Length;
-              //logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
-              CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
-            }
-          }
+          EditorIsInitialized = true;
+          EditorHasBeenInitialized?.Invoke(this, e);
         }
 
-        private void CodeEditor_KeyDown(Object sender, KeyEventArgs e)
-        {
-            if (CallTipIsActive && (e.Key == Keys.Up || e.Key == Keys.Down)) {
-                logger?.Invoke("TODO: implement CodeEditor_KeyDown handler");
-            }
-        }
+        private string LanguageEnumToString(ProgrammingLanguage language) =>
+            language == ProgrammingLanguage.GLSL
+              ? "glsl" // need to add support in monaco
+              : language == ProgrammingLanguage.Python
+                ? "python"
+                : language == ProgrammingLanguage.VB
+                  ? "vb"
+                  : "csharp";
 
-        public void KeyPressedInCallTips(char key) {
-          logger?.Invoke($"KeyPressedInCallTips TOP. key: {key}");
-          if (key == ',')
-          {
-            logger?.Invoke($"KeyPressidInCallTips: char:{key}");
-            if (signatures?.CurrentSignatureCurrentParameterindexsTrySetNext() ?? false)
-            {
-              var t = signatures.CurrentSignatureCurrentParameterIndexes;
-              var pfxLen = signatures.DisplayPrefix.Length;
-              logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
-              CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
-            }
-          }
-          if (key == ')')
-            ResetCallTipsAndSignatures();
-        }
-
-        static string[] GetKeywords(ProgrammingLanguage language)
-        {
-            switch (language)
-            {
-                case ProgrammingLanguage.CSharp:
-                    return new string[]
-                    {
-                    "abstract as base break case catch checked continue default delegate do else event explicit extern false finally fixed for foreach goto if implicit in interface internal is lock namespace new null object operator out override params private protected public readonly ref return sealed sizeof stackalloc switch this throw true try typeof unchecked unsafe using virtual while",
-                    "bool byte char class const decimal double enum float int long sbyte short static string struct uint ulong ushort void"
-                    };
-                case ProgrammingLanguage.GLSL:
-                    {
-                        LanguageGlsl.GetKeywords(out string k, out string f);
-                        return new string[] { k, f };
-                    }
-                case ProgrammingLanguage.Python:
-                    return new string[]
-                    {
-                        "and as assert break class continue def del elif else except exec finally for from global if import in is lambda not or pass print raise return try while with yield",
-                        "None is not def"
-                    };
-                case ProgrammingLanguage.VB:
-                    {
-                        LanguageVbNet.GetKeywords(out string k, out string f);
-                        return new string[] { k, f };
-                    }
-                default:
-                    return new string[0];
-            }
-        }
-
-        private void Handler_CallTipClicked(Object sender, CallTipClickedEventArgs e)
-        {
-          logger?.Invoke($"ctclicked: {e.Move}");
-          if (e.Move == CallTipMove.Current)
-            return;
-          if (e.Move == CallTipMove.Next)
-            signatures?.SetNextAsCurrent();
-          else
-            signatures?.SetPreviousAsCurrent();
-          CallTipCancel();
-          CallTipsShow(CurrentPosition, signatures.CurrentSignatureDisplay);
-          if (!(signatures?.CurrentSignatureHasNoParameters ?? true))
-          {
-            var t = signatures.CurrentSignatureCurrentParameterIndexes;
-            var pfxLen = signatures.DisplayPrefix.Length;
-            logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
-            CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
-          }
-        }
-
-        readonly ProgrammingLanguage _language;
         public CodeEditor(ProgrammingLanguage language, bool darkMode=false, 
             Func<string, int, char, Task<List<string>>> getCompletions = null,
             Action<string> logger = null)
         {
-            CallTipClicked += Handler_CallTipClicked;
+            this.Url = Ed.Core.Env.Source;
+        
+            DocumentLoaded += (s, e) =>
+            {
+              Window.ActiveTextEditor.Document.SetLanguageIdAsync(LanguageEnumToString(language));
+              RegisterGetCompletions(getCompletions);
+              OnEditorHasBeenInitialized(EventArgs.Empty);
+              SizeChanged += async (sender, ea) =>
+              {
+                await ExecuteScriptAsync($"ed.layout();");
+              };
+            };
+
+            //CallTipClicked += Handler_CallTipClicked;
 
             if (getCompletions != null)
             {
-                // todo: the rest of this 'if' block assumes C#
-                GetCompletions = getCompletions;
+                Handler.RegisterGetCompletions(getCompletions);
+                //// todo: the rest of this 'if' block assumes C#
+                //GetCompletions = getCompletions;
 
-                CharAdded += async (s, e) =>
-                {
-                  char key = e.Char;
+                //CharAdded += async (s, e) =>
+                //{
+                //  char key = e.Char;
             
-                  if (CallTipIsActive)
-                  {
-                    if (key == ',')
-                    {
-                      if (signatures?.CurrentSignatureCurrentParameterindexsTrySetNext() ?? false)
-                      {
-                        var t = signatures.CurrentSignatureCurrentParameterIndexes;
-                        var pfxLen = signatures.DisplayPrefix.Length;
-                        logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
-                        CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
-                      }
-                    }
-                    if (key == ')')
-                      ResetCallTipsAndSignatures();
-                    return;
-                  }
+                //  if (CallTipIsActive)
+                //  {
+                //    if (key == ',')
+                //    {
+                //      if (signatures?.CurrentSignatureCurrentParameterindexsTrySetNext() ?? false)
+                //      {
+                //        var t = signatures.CurrentSignatureCurrentParameterIndexes;
+                //        var pfxLen = signatures.DisplayPrefix.Length;
+                //        logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
+                //        CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
+                //      }
+                //    }
+                //    if (key == ')')
+                //      ResetCallTipsAndSignatures();
+                //    return;
+                //  }
             
-                  if (key != ' ' && key != '.' && key != '(')
-                      return;
-                  logger?.Invoke("GetCompletions before");
-                  List<string> completionItems = await GetCompletions(Text, CurrentPosition, key);
-                  if (completionItems == null || completionItems.Count == 0)
-                      return;
-                  logger?.Invoke("GetCompletions after");
-                  if (key == '(')
-                  {
-                    ResetCallTipsAndSignatures();
-                    signatures = new Signatures(completionItems, logger);
-                    CallTipsShow(CurrentPosition, signatures.CurrentSignatureDisplay);
-                    if (!signatures.CurrentSignatureHasNoParameters)
-                    {
-                      var t = signatures.CurrentSignatureCurrentParameterIndexes;
-                      var pfxLen = signatures.DisplayPrefix.Length;
-                      logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
-                      CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
-                    }
-                  }
-                  else
-                  {
-                    var completionString = completionItems
-                      .OrderBy(i => i)
-                      .Aggregate((a, b) => $"{a} {b}");
-                    logger?.Invoke($"completionString: {completionString}");
-                    logger?.Invoke("AutoCompleteShow before");
-                    AutoCompleteShow(0, completionString);
-                    logger?.Invoke("AutoCompleteShow after");
-                  }
-                };
+                //  if (key != ' ' && key != '.' && key != '(')
+                //      return;
+                //  logger?.Invoke("GetCompletions before");
+                //  List<string> completionItems = await GetCompletions(Text, CurrentPosition, key);
+                //  if (completionItems == null || completionItems.Count == 0)
+                //      return;
+                //  logger?.Invoke("GetCompletions after");
+                //  if (key == '(')
+                //  {
+                //    ResetCallTipsAndSignatures();
+                //    signatures = new Signatures(completionItems, logger);
+                //    CallTipsShow(CurrentPosition, signatures.CurrentSignatureDisplay);
+                //    if (!signatures.CurrentSignatureHasNoParameters)
+                //    {
+                //      var t = signatures.CurrentSignatureCurrentParameterIndexes;
+                //      var pfxLen = signatures.DisplayPrefix.Length;
+                //      logger?.Invoke($"pfxLen:{pfxLen}, s:{pfxLen + t.Item1}, e:{pfxLen + t.Item2}");
+                //      CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
+                //    }
+                //  }
+                //  else
+                //  {
+                //    var completionString = completionItems
+                //      .OrderBy(i => i)
+                //      .Aggregate((a, b) => $"{a} {b}");
+                //    logger?.Invoke($"completionString: {completionString}");
+                //    logger?.Invoke("AutoCompleteShow before");
+                //    AutoCompleteShow(0, completionString);
+                //    logger?.Invoke("AutoCompleteShow after");
+                //  }
+                //};
             }
 
-            AutoIndentEnabled = true;
-            _language = language;
+            //AutoIndentEnabled = true;
+            //_language = language;
             Handler.SetProgrammingLanguage( language, GetKeywords(language) );
 
-            Handler.CharAdded += Handler_CharAdded;
-            var backgroundColor = darkMode ? Eto.Drawing.Color.FromArgb(30,30,30) : Eto.Drawing.Colors.White;
-            SetColor(Section.Default, darkMode ? Drawing.Color.FromArgb(212,212,212) : Drawing.Colors.Black, backgroundColor);
-            SetColor(Section.Comment, darkMode ? Drawing.Color.FromArgb(106, 153, 85) : Drawing.Colors.DimGray, backgroundColor);
-            SetColor(Section.Keyword1, darkMode ? Drawing.Color.FromArgb(197, 134, 192) : Drawing.Colors.Blue, backgroundColor);
-            SetColor(Section.Keyword2, darkMode ? Drawing.Color.FromArgb(197, 134, 192) : Drawing.Colors.Blue, backgroundColor);
-            SetColor(Section.Strings, darkMode ? Drawing.Color.FromArgb(206, 145, 120) : Drawing.Color.FromArgb(163, 21, 21), backgroundColor);
-            SetColor(Section.LineNumber, darkMode ? Drawing.Color.FromArgb(160, 160, 160) : Drawing.Colors.Gray, backgroundColor);
-            SetColor(Section.DefName, darkMode ? Drawing.Color.FromArgb(220, 220, 170) : Drawing.Color.FromArgb(64, 174, 215), backgroundColor);
-            SetColor(Section.Preprocessor, darkMode ? Drawing.Colors.DarkGray : Drawing.Colors.DimGray, backgroundColor);
-            SetColor(Section.FoldingMargin, darkMode ? Drawing.Color.FromArgb(160, 160, 160) : Drawing.Colors.Gray, backgroundColor);
             TabWidth = 4;
             ReplaceTabsWithSpaces = true;
             BackspaceUnindents = true;
         }
+
+        public Ed.Core.Languages Languages => Ed.Core.Languages.Instance;
+        public Ed.Core.Window Window => Ed.Core.Window.Instance;
+        public Ed.Core.Workspace Workspace => Ed.Core.Workspace.Instance;
 
         void Handler_CharAdded(object sender, CharAddedEventArgs e)
         {
@@ -448,8 +473,13 @@ namespace Eto.CodeEditor
 #if DEBUG
         public int direct_message(int msg, int val) => Handler.direct_message(msg, val);
 #endif
+        
+        public void RegisterGetCompletions(Func<string, int, char, Task<List<string>>> getCompletions)
+        {
+          Handler.RegisterGetCompletions(getCompletions);
+        }
 
-        public new interface IHandler : Control.IHandler
+        public new interface IHandler : WebView.IHandler, Ed.Core.IEd
         {
             string Text { get; set; }
             void SetProgrammingLanguage(ProgrammingLanguage language, string[] keywordSets);

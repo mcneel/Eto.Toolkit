@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
 
     <DefineConstants>$(DefineConstants);WPF</DefineConstants>
     <UseWPF>true</UseWPF>
@@ -25,12 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Eto.CodeEditor\Eto.CodeEditor.csproj"/>
+    <ProjectReference Include="..\Eto.CodeEditor\Eto.CodeEditor.csproj" />
   </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Eto.Platform.Wpf" Version="2.5.2" />
   	<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="all" />
+  	<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.664.37" />
   </ItemGroup>
 
   <Import Project="..\..\build\WindowsDesktop.Sdk.targets" />

@@ -1,0 +1,14 @@
+<Window x:Class="Ed.Wpf.TestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ed.Wpf.TestApp"
+        xmlns:ewv2="clr-namespace:Ed.Wpf;assembly=Ed.Wpf"
+        mc:Ignorable="d"
+        Title="Text Editor" Height="575" Width="629">
+  <DockPanel DockPanel.Dock="Top">
+    <ComboBox Name="themes"  Width="100" DisplayMemberPath="Description" DockPanel.Dock="Top"/>
+    <ewv2:EdWebView2 Name="edWebView2" Width="612" />
+  </DockPanel>
+</Window>

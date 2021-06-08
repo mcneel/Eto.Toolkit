@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Configurations>Debug;Release;Debug-Ed.TestApp.Wpf;Debug32</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="MainWindow.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="MainWindow.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSharpCompletionProvider\CSharpCompletionProvider.csproj" />
+    <ProjectReference Include="..\Ed.Core\Ed.Core.csproj" />
+    <ProjectReference Include="..\Ed.Wpf\Ed.Wpf.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="RhinoCommon">
+      <HintPath>..\..\..\mcneel.com\rhino7\src4\bin\Debug\RhinoCommon.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

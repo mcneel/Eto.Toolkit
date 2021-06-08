@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html style="display:flex; flex-direction:column; height:100%; margin:0; padding:0">
+	<head>
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<link
+			rel="stylesheet"
+			data-name="vs/editor/editor.main"
+			href="node_modules/monaco-editor/min/vs/editor/editor.main.css"
+		/>
+	</head>
+	<body style="min-height:100%; margin:0; padding:0">
+		<!--
+		<button type="button" onclick="window.chrome.webview.postMessage('Hello from Javascript');">Hello from JS</button>
+		<button type="button" onclick="ed.CP();">start completion server</button>
+		-->
+		<!--<div id="container" style="width: 595px; height: 450px; border: 1px solid grey"></div>-->
+		<!--<div id="container" style="height:200px; min-height:100%; width:auto; min-width:100%; border: 1px solid grey"></div>-->
+		<div id="container" style="height:100%; margin:0; padding:0"></div>
+
+		<script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+				window.chrome.webview.postMessage('{ "event":"DOMContentLoaded"}');
+				//window.monaco_editor.layout({ height: document.documentElement.scrollHeight - 20 }); // force editor to fill it's container
+      });
+		</script>
+		<script>
+			var require = { paths: { vs: 'node_modules/monaco-editor/min/vs' } };
+		</script>
+		<script src="node_modules/monaco-editor/min/vs/loader.js"></script>
+		<script src="node_modules/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+		<script src="node_modules/monaco-editor/min/vs/editor/editor.main.js"></script>
+		<script src="script/interop.js"></script>
+		<script src="script/ed.js"></script>
+
+		<script>
+			//var editor = monaco.editor.create(document.getElementById('container'), {
+			//	value: ["using Rhino.Geometry;", "", "var p = new Point3d(10,10,0);"].join("\n"),
+			//	language: "csharp",
+			//	theme: "vs"
+			//});
+			const code =
+`using Rhino.Geometry;
+var p = new Point3d`;
+			window.monaco_editor_model = monaco.editor.createModel(code, "csharp");
+			window.monaco_editor = monaco.editor.create(document.getElementById("container"), {
+				model: window.monaco_editor_model,
+				minimap: {enabled: false}
+				//automaticLayout: true // todo: resource intensive. Try calling ed.layout() - doesn't seem to work correctly though
+			});
+			ed.HookupCompletionProvider();
+		</script>
+	</body>
+</html>
