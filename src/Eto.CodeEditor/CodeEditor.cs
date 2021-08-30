@@ -107,6 +107,13 @@ namespace Eto.CodeEditor
           }
         }
 
+#if TRACK_GC        
+        ~CodeEditor()
+        {
+            System.Diagnostics.Debug.WriteLine("~CodeEditor()");
+        }
+#endif
+
         readonly ProgrammingLanguage _language;
         public CodeEditor(ProgrammingLanguage language, bool darkMode=false, 
             Func<string, int, char, Task<List<string>>> getCompletions = null,

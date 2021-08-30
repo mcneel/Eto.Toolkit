@@ -15,7 +15,7 @@ namespace Scintilla
         private IntPtr moduleHandle;
         private IntPtr sciPtr;
         private BorderStyle borderStyle = BorderStyle.None;
-        //private static NativeMethods.Scintilla_DirectFunction directFunction;
+        private NativeMethods.Scintilla_DirectFunction directFunction;
 
         private IntPtr SciPointer
         {
@@ -43,6 +43,11 @@ namespace Scintilla
         {
             base.SetStyle(ControlStyles.UserPaint, false);
             init();
+        }
+
+        internal IntPtr DirectMessage(IntPtr sciPtr, int msg, IntPtr wParam, IntPtr lParam)
+        {
+            return directFunction(sciPtr, msg, wParam, lParam);
         }
 
         /// <summary>

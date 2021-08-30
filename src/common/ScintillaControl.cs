@@ -10,6 +10,15 @@ using System.ComponentModel;
 
 namespace Scintilla
 {
+    public interface IScintillaControlCallback
+    {
+        void TriggerBreakpointsChanged(BreakpointsChangedEventArgs e);
+        void TriggerCallTipClicked(CallTipClickedEventArgs callTipClickedEventArgs);
+        void TriggerCharAdded(CharAddedEventArgs charAddedEventArgs);
+        void TriggerSelectionChanged(SelectionChangedEventArgs ea);
+        void TriggerTextChanged();
+    }
+    
     public partial class ScintillaControl //: CodeEditor.IHandler
     {
         private const int BREAKPOINT_MARKER = 3; // arbitrary number
@@ -19,7 +28,14 @@ namespace Scintilla
         private const int LINENUMBERS_MARGIN = 2;
         private const int FOLDING_MARGIN = 3;
 
-        public NativeMethods.Scintilla_DirectFunction directFunction;
+        // public NativeMethods.Scintilla_DirectFunction directFunction;
+        
+#if TRACK_GC    
+        ~ScintillaControl()
+        {
+            System.Diagnostics.Debug.WriteLine("~ScintillaControl()");
+        }
+#endif
 
         private Tuple<int, int>[] foldMarkersAndSymbols = new[] {
                 Tuple.Create<int, int>(NativeMethods.SC_MARKNUM_FOLDEREND, NativeMethods.SC_MARK_BOXPLUSCONNECTED),
@@ -322,7 +338,7 @@ namespace Scintilla
         {
             //Control.SetGeneralProperty(NativeMethods.SCI_MARKERDELETEALL, BREAKPOINT_MARKER);
             DirectMessage(NativeMethods.SCI_MARKERDELETEALL, new IntPtr(BREAKPOINT_MARKER), IntPtr.Zero);
-            BreakpointsChanged?.Invoke(this, new BreakpointsChangedEventArgs(BreakpointChangeType.Clear));
+            Callback?.TriggerBreakpointsChanged(new BreakpointsChangedEventArgs(BreakpointChangeType.Clear));
         }
 
         public bool IsFoldingMarginVisible
@@ -340,16 +356,12 @@ namespace Scintilla
             }
         }
 
-        public event EventHandler<CharAddedEventArgs> CharAdded;
-        
-        // The 'new' keyword is not required on macos because there TextChanged does not hide an accessible member bu it is required on Windows.
-#pragma warning disable CS0109
-        public new event EventHandler<EventArgs> TextChanged; // hides inherited TextChanged
-#pragma warning restore CS0109
-
-        public event EventHandler<CallTipClickedEventArgs> CallTipClicked;
-        public event EventHandler<SelectionChangedEventArgs> SelectionChanged;
-        public event EventHandler<BreakpointsChangedEventArgs> BreakpointsChanged;
+        WeakReference _callback;
+        public IScintillaControlCallback Callback
+        {
+            get => _callback?.Target as IScintillaControlCallback;
+            set => _callback = new WeakReference(value);
+        }
 
         private HashSet<int> styles = new HashSet<int>() { NativeMethods.STYLE_DEFAULT };
         public void SetColor(Section section, Eto.Drawing.Color foreground, Eto.Drawing.Color background)
@@ -802,9 +814,16 @@ namespace Scintilla
 
         public unsafe string GetTextRange(int position, int length)
         {
-            var textLength = DirectMessage(NativeMethods.SCI_GETTEXTLENGTH).ToInt32();            position = Helpers.Clamp(position, 0, textLength);            length = Helpers.Clamp(length, 0, textLength - position);
+            var textLength = DirectMessage(NativeMethods.SCI_GETTEXTLENGTH).ToInt32();
+            position = Helpers.Clamp(position, 0, textLength);
+            length = Helpers.Clamp(length, 0, textLength - position);
 
-            var ptr = DirectMessage(NativeMethods.SCI_GETRANGEPOINTER, position, length);            if (ptr == IntPtr.Zero)                return string.Empty;            return new string((sbyte*)ptr, 0, length, /*Encoding*/System.Text.Encoding.UTF8);        }
+            var ptr = DirectMessage(NativeMethods.SCI_GETRANGEPOINTER, position, length);
+            if (ptr == IntPtr.Zero)
+                return string.Empty;
+
+            return new string((sbyte*)ptr, 0, length, /*Encoding*/System.Text.Encoding.UTF8);
+        }
 
         public unsafe void AutoCompleteShow(int lenEntered, string list)
         {
@@ -979,13 +998,6 @@ namespace Scintilla
             return result;
         }
 
-        internal IntPtr DirectMessage(IntPtr sciPtr, int msg, IntPtr wParam, IntPtr lParam)
-        {
-            // Like Win32 SendMessage but directly to Scintilla
-            var result = directFunction(sciPtr, msg, wParam, lParam);
-            return result;
-        }
-
         internal unsafe void SetProperty(string name, string value)
         {
             fixed (byte* bpName = Helpers.GetBytes(name, Encoding.UTF8, zeroTerminated: true))
@@ -1007,10 +1019,10 @@ namespace Scintilla
             switch (message)
             {
                 case NativeMethods.SCN_CALLTIPCLICK:
-                    CallTipClicked?.Invoke(this, new CallTipClickedEventArgs(position));
+                    Callback?.TriggerCallTipClicked(new CallTipClickedEventArgs(position));
                     break;
                 case NativeMethods.SCN_CHARADDED:
-                    CharAdded?.Invoke(this, new CharAddedEventArgs(c));
+                    Callback?.TriggerCharAdded(new CharAddedEventArgs(c));
                     break;
                 case NativeMethods.SCN_UPDATEUI:
                     // modificationType is always 0 for this message for some reason. 
@@ -1018,7 +1030,7 @@ namespace Scintilla
                     //{
                         var si = SelectionInfo();
                         var ea = new SelectionChangedEventArgs(si.Item1, si.Item2, si.Item3, si.Item4);
-                        SelectionChanged?.Invoke(this, ea);
+                        Callback?.TriggerSelectionChanged(ea);
                     //}
                     break;
                 case NativeMethods.SCN_MODIFIED:
@@ -1027,7 +1039,7 @@ namespace Scintilla
                         var text = Helpers.GetString(n.text, (int)n.length, Encoding);
                         InsertCheck?.Invoke(this, new InsertCheckEventArgs(text));
                     }*/
-                    TextChanged?.Invoke(this, EventArgs.Empty);
+                    Callback?.TriggerTextChanged();
                     break;
                 case NativeMethods.SCN_MARGINCLICK:
                     if (margin != BREAKPOINTS_MARGIN)
@@ -1041,7 +1053,7 @@ namespace Scintilla
                         return;
                     //Control.SetGeneralProperty(addOrRemove == BreakpointChangeType.Add ? NativeMethods.SCI_MARKERADD : NativeMethods.SCI_MARKERDELETE, lineNumber, BREAKPOINT_MARKER);
                     DirectMessage(addOrRemove == BreakpointChangeType.Add ? NativeMethods.SCI_MARKERADD : NativeMethods.SCI_MARKERDELETE, lineNumber, new IntPtr(BREAKPOINT_MARKER));
-                    BreakpointsChanged?.Invoke(this, new BreakpointsChangedEventArgs(addOrRemove, lineNumber.ToInt32()));
+                    Callback?.TriggerBreakpointsChanged(new BreakpointsChangedEventArgs(addOrRemove, lineNumber.ToInt32()));
                     break;
                 default:
                     break;

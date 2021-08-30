@@ -26,6 +26,7 @@ namespace Eto.CodeEditor
             //string path = ScintillaControl.UnpackNativeScintilla();
             //ScintillaNET.Scintilla.SetModulePath(path);
             scintilla = new Scintilla.ScintillaControl(); // new ScintillaNET.Scintilla();
+            scintilla.Callback = this;
             WinFormsControl = scintilla;
 
             ///*scintilla*/this.CharAdded += WinFormsControl_CharAdded;
