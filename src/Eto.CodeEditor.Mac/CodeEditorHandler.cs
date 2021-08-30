@@ -15,25 +15,26 @@ using Scintilla;
 
 namespace Eto.CodeEditor
 {
-    public partial class CodeEditorHandler : Eto.Mac.Forms.MacView<Scintilla.ScintillaControl, CodeEditor, CodeEditor.ICallback>, CodeEditor.IHandler, Eto.Mac.Forms.IMacControl
+    public partial class CodeEditorHandler : Eto.Mac.Forms.MacView<Scintilla.ScintillaControl, CodeEditor, CodeEditor.ICallback>, CodeEditor.IHandler
     {
-        public WeakReference WeakHandler { get; set; }
-
         static CodeEditorHandler()
         {
             var path = Path.Combine(NSBundle.MainBundle.PrivateFrameworksPath, "Scintilla.framework", "Scintilla");
             Dlfcn.dlopen(path, 4);
         }
-
+        
         private Scintilla.ScintillaControl scintilla;
 
         private EtoScintillaNotificationProtocol notificationProtocol;
         public CodeEditorHandler()
         {
             scintilla = new Scintilla.ScintillaControl();
+            scintilla.Callback = this;
+            
             notificationProtocol = new EtoScintillaNotificationProtocol();
-            notificationProtocol.Notify += NotificationProtocol_Notify;
+            notificationProtocol.Callback = this;
             scintilla.WeakDelegate = notificationProtocol;
+            
             Control = scintilla;
 
             FontName = "Menlo";
@@ -52,10 +53,9 @@ namespace Eto.CodeEditor
             Control.SetKeywords(set, keywords);
         }
 
-        unsafe void NotificationProtocol_Notify(object sender, SCNotifyEventArgs e)
+        public void TriggerNotify(int message, char c, int position, int margin)
         {
-            var n = e.Notification;
-            Control.HandleScintillaMessage((int)n.nmhdr.code, (char)n.ch, (int)n.position, n.margin);
+            Control.HandleScintillaMessage(message, c, position, margin);
         }
 
         Encoding Encoding

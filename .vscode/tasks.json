@@ -20,6 +20,24 @@
                 "clear": true
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-codeeditor",
+            "type": "shell",
+            "osx": {
+                "command": "dotnet build test/Eto.CodeEditor.TestApp.Mac/Eto.CodeEditor.TestApp.XamMac2.csproj ${config:var.buildParameters}"
+            },
+            "windows": {
+                "command": "dotnet build test/Eto.CodeEditor.TestApp.Wpf/Eto.CodeEditor.TestApp.Wpf.csproj ${config:var.buildParameters}"
+            },
+            "group": {
+                "isDefault": true,
+                "kind": "build"
+            },
+            "presentation": {
+                "clear": true
+            },
+            "problemMatcher": "$msCompile"
         }
     ]
 }

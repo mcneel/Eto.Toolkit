@@ -9,11 +9,19 @@ using Eto.Forms;
 using Eto.CodeEditor;
 using ScintillaNET;
 using ed = Eto.Drawing;
+using Scintilla;
 
 namespace Eto.CodeEditor
 {
-    public partial class CodeEditorHandler
+    public partial class CodeEditorHandler : IScintillaControlCallback
     {
+#if TRACK_GC
+        ~CodeEditorHandler()
+        {
+            System.Diagnostics.Debug.WriteLine("~CodeEditorHandler()");
+        }
+#endif
+
         #region IHandler impl
         public string Text
         {
@@ -30,7 +38,7 @@ namespace Eto.CodeEditor
 
         public Eto.Drawing.Font Font
         {
-            get => new ed.Font(scintilla.FontName, scintilla.FontSizeFractional, FontStyle(scintilla.Bold, scintilla.Italic)) ;
+            get => new ed.Font(scintilla.FontName, scintilla.FontSizeFractional, FontStyle(scintilla.Bold, scintilla.Italic));
             set
             {
                 scintilla.FontName = value.FamilyName;
@@ -153,7 +161,7 @@ namespace Eto.CodeEditor
 
         public bool AutoCompleteActive => scintilla.AutoCompleteActive;
 
-        public unsafe void InsertText(int position, string text) 
+        public unsafe void InsertText(int position, string text)
         {
             scintilla.InsertText(position, text);
         }
@@ -171,7 +179,7 @@ namespace Eto.CodeEditor
             scintilla.ReplaceFirstOccuranceInLine(oldText, newText, lineNumber);
         }
 
-        public void DeleteRange(int position, int length) 
+        public void DeleteRange(int position, int length)
         {
             scintilla.DeleteRange(position, length);
         }
@@ -202,39 +210,30 @@ namespace Eto.CodeEditor
 
         public void CallTipCancel() => scintilla.CallTipCancel();
 
-        public event EventHandler<CharAddedEventArgs> CharAdded
-        {
-            add { scintilla.CharAdded += value; }
-            remove { scintilla.CharAdded -= value; }
-        }
 
-        public event EventHandler<EventArgs> TextChanged
-        {
-            add { scintilla.TextChanged += value; }
-            remove { scintilla.TextChanged -= value; }
-        }
+        public event EventHandler<CharAddedEventArgs> CharAdded;
 
-        public event EventHandler<CallTipClickedEventArgs> CallTipClicked
-        {
-            add { scintilla.CallTipClicked += value; }
-            remove { scintilla.CallTipClicked -= value; }
-        }
+        public event EventHandler<EventArgs> TextChanged;
 
-        public event EventHandler<SelectionChangedEventArgs> SelectionChanged
-        {
-            add { scintilla.SelectionChanged += value; }
-            remove { scintilla.SelectionChanged -= value; }
-        }
+        public event EventHandler<CallTipClickedEventArgs> CallTipClicked;
 
-        public event EventHandler<BreakpointsChangedEventArgs> BreakpointsChanged
-        {
-            add { scintilla.BreakpointsChanged += value; }
-            remove { scintilla.BreakpointsChanged -= value; }
-        }
+        public event EventHandler<SelectionChangedEventArgs> SelectionChanged;
+
+        public event EventHandler<BreakpointsChangedEventArgs> BreakpointsChanged;
+
+        public void TriggerBreakpointsChanged(BreakpointsChangedEventArgs e) => BreakpointsChanged?.Invoke(Widget, e);
+
+        public void TriggerCallTipClicked(CallTipClickedEventArgs callTipClickedEventArgs) => CallTipClicked?.Invoke(Widget, callTipClickedEventArgs);
+
+        public void TriggerCharAdded(CharAddedEventArgs charAddedEventArgs) => CharAdded?.Invoke(Widget, charAddedEventArgs);
+
+        public void TriggerSelectionChanged(SelectionChangedEventArgs ea) => SelectionChanged?.Invoke(Widget, ea);
+
+        public void TriggerTextChanged() => TextChanged?.Invoke(Widget, EventArgs.Empty);
 
 #if DEBUG
         public int direct_message(int msg, int val) => scintilla.DirectMessage(msg, new IntPtr(val), IntPtr.Zero).ToInt32();
 #endif
-#endregion
+        #endregion
     }
 }

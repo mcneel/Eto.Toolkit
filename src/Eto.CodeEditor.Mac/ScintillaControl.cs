@@ -11,8 +11,13 @@ namespace Scintilla
 
         public ScintillaControl()
         {
-            directFunction = (_, m, w, l) => Message((uint)m, w, l);
             init();
         }
+        
+        internal IntPtr DirectMessage(IntPtr sciPtr, int msg, IntPtr wParam, IntPtr lParam)
+        {
+            return Message((uint)msg, wParam, lParam);
+        }
+        
     }
 }
