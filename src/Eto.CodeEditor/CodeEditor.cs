@@ -106,11 +106,13 @@ namespace Eto.CodeEditor
             CallTipsSetHighlight(pfxLen + t.Item1, pfxLen+ t.Item2);
           }
         }
-        
+
+#if TRACK_GC        
         ~CodeEditor()
         {
             System.Diagnostics.Debug.WriteLine("~CodeEditor()");
         }
+#endif
 
         readonly ProgrammingLanguage _language;
         public CodeEditor(ProgrammingLanguage language, bool darkMode=false, 
