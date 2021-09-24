@@ -2,15 +2,18 @@
 
   <PropertyGroup>
     <UseXamarinMacBinding>True</UseXamarinMacBinding>
-    <TargetFrameworks>net45</TargetFrameworks> <!-- Bindings projects only support net45.. -->
+    <IsBindingProject>True</IsBindingProject>
+    <TargetFrameworks>net6.0-macos;net45</TargetFrameworks> <!-- Bindings projects only support net45.. -->
     <TargetFrameworks Condition="$(HasXamarinMac) == 'True'">$(TargetFrameworks);xamarinmac20</TargetFrameworks>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <IsPackable>False</IsPackable>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
   </PropertyGroup>
 
 
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <Compile Include="NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
@@ -22,6 +25,6 @@
     </NativeReference>
   </ItemGroup>
 
-  <Import Project="..\..\build\Xamarin.Mac.targets" />
+  <Import Project="..\..\build\Xamarin.Mac.targets" Condition="$(TargetFramework) == 'net45'" />
 
 </Project>
