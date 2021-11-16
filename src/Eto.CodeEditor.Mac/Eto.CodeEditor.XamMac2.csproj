@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <UseXamarinMac>True</UseXamarinMac>
-    <TargetFrameworks>net45</TargetFrameworks>
+    <TargetFrameworks>net462</TargetFrameworks>
     <TargetFrameworks Condition="$(HasXamarinMac) == 'True'">$(TargetFrameworks);xamarinmac20</TargetFrameworks>
     
     <RootNamespace>Eto.CodeEditor</RootNamespace>
