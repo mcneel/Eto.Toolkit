@@ -1,0 +1,40 @@
+<Project>
+  <PropertyGroup>
+    <XamarinMacPath Condition="Exists('\Library\Frameworks\Xamarin.Mac.framework\Versions\Current\')">\Library\Frameworks\Xamarin.Mac.framework\Versions\Current\</XamarinMacPath>
+    <XamarinMacLibPath Condition="$(XamarinMacLibPath) == ''">$(XamarinMacPath)lib\reference\full\</XamarinMacLibPath>
+    <XamarinMacBinPath Condition="$(XamarinMacBinPath) == ''">$(XamarinMacPath)bin\</XamarinMacBinPath>
+
+    <DefaultItemExcludes>api\*;$(DefaultItemExcludes)</DefaultItemExcludes>
+    
+    <BGenOutputPath Condition="$(BGenOutputPath) == ''">generated</BGenOutputPath>
+    <BGenCommand Condition="$(BGenCommand) == ''">bgen</BGenCommand>
+    <BGenCommand Condition="$(XamarinMacPath) != ''">$(XamarinMacBinPath)$(BGenCommand)</BGenCommand>
+    
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Reference Include="$(XamarinMacLibPath)Xamarin.Mac.dll" Private="False" />
+    <Compile Remove="@(ObjcBindingApiDefinition)" />
+  </ItemGroup>
+  
+  <Target Name="bgen">
+    <PropertyGroup>
+      <BGenTargetFramework Condition="$(TargetFramework) == 'net45'">Xamarin.Mac,Version=v4.5,Profile=Full</BGenTargetFramework>
+      <BGenTargetFramework Condition="$(TargetFramework.Contains('-macos'))">Xamarin.Mac,Version=v6.0,Profile=Full</BGenTargetFramework>
+      <BGenTargetFramework Condition="$(BGenTargetFramework) == ''">Xamarin.Mac,Version=v4.5,Profile=Full</BGenTargetFramework>
+      
+      <!-- <BGenArguments>$(BGenArguments) -core</BGenArguments> -->
+      <BGenArguments>$(BGenArguments) --ns=$(RootNamespace)</BGenArguments>
+      <BGenArguments>$(BGenArguments) --tmpdir=$(BGenOutputPath)</BGenArguments>
+      <BGenArguments>$(BGenArguments) --sourceonly=$(IntermediateOutputPath)bgen/source.out</BGenArguments>
+      <BGenArguments>$(BGenArguments) --target-framework=$(BGenTargetFramework)</BGenArguments>
+      <BGenArguments>$(BGenArguments) --api=@(ObjcBindingApiDefinition, ' --api=')</BGenArguments>
+    </PropertyGroup>
+    
+    <MakeDir Directories="$(BGenOutputPath);$(IntermediateOutputPath)bgen" />
+    
+    <Error Text="bgen not found" Condition="!Exists($(BGenCommand))" />
+    
+    <Exec Command="$(BGenCommand) $(BGenArguments)" />
+  </Target>
+</Project>

@@ -6,22 +6,21 @@
     <TargetFrameworks Condition="$(HasXamarinMac) == 'True'">$(TargetFrameworks);xamarinmac20</TargetFrameworks>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <IsPackable>False</IsPackable>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
 
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
-  <ItemGroup>
+  <!-- <ItemGroup>
     <NativeReference Include="ScintillaNative\Scintilla.framework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
-  </ItemGroup>
+  </ItemGroup> -->
 
-  <Import Project="..\..\build\Xamarin.Mac.targets" />
+  <Import Project="..\..\build\bgen.targets" />
 
 </Project>

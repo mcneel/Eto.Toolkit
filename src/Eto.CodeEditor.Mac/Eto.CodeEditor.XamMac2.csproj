@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <UseXamarinMac>True</UseXamarinMac>
+    <UseXamarinMac Condition="$(UseXamarinMac) == ''">True</UseXamarinMac>
     <TargetFrameworks>net462</TargetFrameworks>
     <TargetFrameworks Condition="$(HasXamarinMac) == 'True'">$(TargetFrameworks);xamarinmac20</TargetFrameworks>
     
