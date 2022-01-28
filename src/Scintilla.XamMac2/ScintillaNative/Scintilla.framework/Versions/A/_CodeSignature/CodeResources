@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		dnu7dB/2c53rGKJtvxTNaMAwskA=
+		zpHMCqma80JSsBJ15DnQHvxeaIE=
 		</data>
 		<key>Resources/info_bar_bg.tiff</key>
 		<data>
@@ -51,77 +51,77 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ou7t+Oiz2/kNWinkFPLaFZ25JnQ=
+			gjXtyuDgGwZoasg94Mi+a+f0eg8=
 			</data>
 			<key>hash2</key>
 			<data>
-			ty2+T8vsSr4Jc3Z1jOs5oZT4mcernx8jHQdFQ7JGg80=
+			al0/GCRcEse1YqhNEwTmIubxc0DvqUJxGKb5dp7Lncc=
 			</data>
 		</dict>
 		<key>Headers/ILoader.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			lQV28wblBonoI63kyLZbvToBPFw=
+			1FIr1cKwuhFCeCBurZ8RrBgosYs=
 			</data>
 			<key>hash2</key>
 			<data>
-			gyZdyttyE7BAIxuBmQ8u5q8ugwd8YYALAiu/Hj2BT/8=
+			dESON0mE4gDAFC0YPiRPT781DSV+bxwWXsZ7HFV0qnY=
 			</data>
 		</dict>
 		<key>Headers/InfoBar.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BPw68HMxNUAmSYG+SLFtgpQ7ujM=
+			ooRGcBTc3cnFPDhjSn18KzaMIjI=
 			</data>
 			<key>hash2</key>
 			<data>
-			QIeeTh+ZLo2YyJkv/HWsXyy3WJ8enraGBtba5Gocl7c=
+			w5Yu4q1YuaVefHavnc3aN1R6FZTx1lRgmLOXbzCNZ2o=
 			</data>
 		</dict>
 		<key>Headers/InfoBarCommunicator.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			luJw04WCMQsH5N5N+SxwRHMrC2A=
+			eE6izING6yM1Ava5C8lY8mQxkok=
 			</data>
 			<key>hash2</key>
 			<data>
-			o59PSSM58+5CZoZHOS+c2cY0axn5gCDEcVcIbH3ocPo=
+			BaqNJ9vpx7LqrZwApj8U/ihfsnW7Y7xiGQerGDGEJcI=
 			</data>
 		</dict>
 		<key>Headers/Sci_Position.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DjkCikiA4uKFdVEzAlTsLzVVQt8=
+			hmcg94AoP+bka0YxBmwm6OSBhSQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			cUKEQN5alejEC3tt+b0Qmh2fmGRPbwrONGnYIRBw+M4=
+			jO1GzGk/qXvjdYyseZ+iYxYxMXVz7E8XjujdF58H7vU=
 			</data>
 		</dict>
 		<key>Headers/Scintilla.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			05ur4UBEnEVJCrGGbaneCKrlcUI=
+			z8QqTu2+bVrD1Upid9owrH+xuug=
 			</data>
 			<key>hash2</key>
 			<data>
-			DFkK4uSg40TG5Nm0QN3sO5Qzp8bVeec8+Mp4mMI2N7A=
+			/QewjPPQe/oxOg5h+gGsNozXjhDSDXs/9Fg/YK8lX/4=
 			</data>
 		</dict>
 		<key>Headers/ScintillaView.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			a6/9WZT2EadSRH9j8s2QMlslIE0=
+			YBDgHgsQgvx+IgPst+5kAT0+9Zs=
 			</data>
 			<key>hash2</key>
 			<data>
-			Tq3yzOWsJwsF8LTI33LFhjjT3xIidHd55FB3ubBmJ54=
+			Tt5kkb2wXhKqK11cZ7LWf3WIlbiutvAPuUKKwzvLVdQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -139,11 +139,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dnu7dB/2c53rGKJtvxTNaMAwskA=
+			zpHMCqma80JSsBJ15DnQHvxeaIE=
 			</data>
 			<key>hash2</key>
 			<data>
-			rhA6QJ07M+/yif0ZrFTXMl7No4czMGymOEx1KWmfBiM=
+			2UAWxHBIGxIt1pIZM+tUNMH5IaEpYa6SLtRP/mDxm7k=
 			</data>
 		</dict>
 		<key>Resources/info_bar_bg.tiff</key>
