@@ -2,9 +2,7 @@
 // Auto-generated from generator.cs, do not edit
 //
 // We keep references to objects, so warning 414 is expected
-
 #pragma warning disable 414
-
 using System;
 using System.Diagnostics;
 using System.ComponentModel;
@@ -39,9 +37,10 @@ using FileProvider;
 using CoreAnimation;
 using CoreFoundation;
 using NetworkExtension;
-
 #nullable enable
-
+#if !NET
+using NativeHandle = System.IntPtr;
+#endif
 namespace ScintillaNET {
 	[Protocol (Name = "ScintillaNotificationProtocol", WrapperType = typeof (ScintillaNotificationProtocolWrapper))]
 	[ProtocolMember (IsRequired = true, IsProperty = false, IsStatic = false, Name = "Notification", Selector = "notification:", ParameterType = new Type [] { typeof (IntPtr) }, ParameterByRef = new bool [] { false })]
@@ -51,27 +50,19 @@ namespace ScintillaNET {
 		[Export ("notification:")]
 		[Preserve (Conditional = true)]
 		void Notification (global::System.IntPtr notification);
-		
 	}
-	
 	internal sealed class ScintillaNotificationProtocolWrapper : BaseWrapper, IScintillaNotificationProtocol {
 		[Preserve (Conditional = true)]
 		public ScintillaNotificationProtocolWrapper (IntPtr handle, bool owns)
 			: base (handle, owns)
 		{
 		}
-		
 		[Export ("notification:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public void Notification (global::System.IntPtr notification)
 		{
-			if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSend_IntPtr (this.Handle, Selector.GetHandle ("notification:"), notification);
-			} else {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSend_IntPtr (this.Handle, Selector.GetHandle ("notification:"), notification);
-			}
+			global::Scintilla.XamMac2.Messaging.void_objc_msgSend_IntPtr (this.Handle, Selector.GetHandle ("notification:"), notification);
 		}
-		
 	}
 }
 namespace ScintillaNET {
@@ -79,7 +70,6 @@ namespace ScintillaNET {
 	[Register("ScintillaNotificationProtocol", false)]
 	[Model]
 	public unsafe abstract partial class ScintillaNotificationProtocol : NSObject, IScintillaNotificationProtocol {
-		
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
 		[Export ("init")]
