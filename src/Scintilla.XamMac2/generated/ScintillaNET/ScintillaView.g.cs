@@ -2,7 +2,9 @@
 // Auto-generated from generator.cs, do not edit
 //
 // We keep references to objects, so warning 414 is expected
+
 #pragma warning disable 414
+
 using System;
 using System.Diagnostics;
 using System.ComponentModel;
@@ -37,10 +39,9 @@ using FileProvider;
 using CoreAnimation;
 using CoreFoundation;
 using NetworkExtension;
+
 #nullable enable
-#if !NET
-using NativeHandle = System.IntPtr;
-#endif
+
 namespace ScintillaNET {
 	[Register("ScintillaView", true)]
 	public unsafe partial class ScintillaView : global::AppKit.NSView {
@@ -95,9 +96,12 @@ namespace ScintillaNET {
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		const string selString = "string";
 		static readonly IntPtr selStringHandle = Selector.GetHandle ("string");
+		
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		static readonly IntPtr class_ptr = Class.GetHandle ("ScintillaView");
+		
 		public override IntPtr ClassHandle { get { return class_ptr; } }
+		
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
 		[Export ("init")]
@@ -144,194 +148,354 @@ namespace ScintillaNET {
 		public virtual global::AppKit.NSColor GetColorProperty (int property, nint parameter)
 		{
 			if (IsDirectBinding) {
-				return  Runtime.GetNSObject<global::AppKit.NSColor> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_int_IntPtr (this.Handle, selGetColorProperty_Parameter_Handle, property, (IntPtr) parameter))!;
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return  Runtime.GetNSObject<global::AppKit.NSColor> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_int_nint (this.Handle, selGetColorProperty_Parameter_Handle, property, parameter));
+				} else {
+					return  Runtime.GetNSObject<global::AppKit.NSColor> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_int_nint (this.Handle, selGetColorProperty_Parameter_Handle, property, parameter));
+				}
 			} else {
-				return  Runtime.GetNSObject<global::AppKit.NSColor> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_int_IntPtr (this.SuperHandle, selGetColorProperty_Parameter_Handle, property, (IntPtr) parameter))!;
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return  Runtime.GetNSObject<global::AppKit.NSColor> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_int_nint (this.SuperHandle, selGetColorProperty_Parameter_Handle, property, parameter));
+				} else {
+					return  Runtime.GetNSObject<global::AppKit.NSColor> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_int_nint (this.SuperHandle, selGetColorProperty_Parameter_Handle, property, parameter));
+				}
 			}
 		}
+		
 		[Export ("getGeneralProperty:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual nint GetGeneralProperty (int property)
 		{
 			if (IsDirectBinding) {
-				return (nint) global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_int (this.Handle, selGetGeneralProperty_Handle, property);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSend_int (this.Handle, selGetGeneralProperty_Handle, property);
+				} else {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSend_int (this.Handle, selGetGeneralProperty_Handle, property);
+				}
 			} else {
-				return (nint) global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_int (this.SuperHandle, selGetGeneralProperty_Handle, property);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSendSuper_int (this.SuperHandle, selGetGeneralProperty_Handle, property);
+				} else {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSendSuper_int (this.SuperHandle, selGetGeneralProperty_Handle, property);
+				}
 			}
 		}
+		
 		[Export ("getGeneralProperty:parameter:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual nint GetGeneralProperty (int property, nint parameter)
 		{
 			if (IsDirectBinding) {
-				return (nint) global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_int_IntPtr (this.Handle, selGetGeneralProperty_Parameter_Handle, property, (IntPtr) parameter);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSend_int_nint (this.Handle, selGetGeneralProperty_Parameter_Handle, property, parameter);
+				} else {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSend_int_nint (this.Handle, selGetGeneralProperty_Parameter_Handle, property, parameter);
+				}
 			} else {
-				return (nint) global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_int_IntPtr (this.SuperHandle, selGetGeneralProperty_Parameter_Handle, property, (IntPtr) parameter);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSendSuper_int_nint (this.SuperHandle, selGetGeneralProperty_Parameter_Handle, property, parameter);
+				} else {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSendSuper_int_nint (this.SuperHandle, selGetGeneralProperty_Parameter_Handle, property, parameter);
+				}
 			}
 		}
+		
 		[Export ("getGeneralProperty:parameter:extra:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual nint GetGeneralProperty (int property, nint parameter, nint extra)
 		{
 			if (IsDirectBinding) {
-				return (nint) global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_int_IntPtr_IntPtr (this.Handle, selGetGeneralProperty_Parameter_Extra_Handle, property, (IntPtr) parameter, (IntPtr) extra);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSend_int_nint_nint (this.Handle, selGetGeneralProperty_Parameter_Extra_Handle, property, parameter, extra);
+				} else {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSend_int_nint_nint (this.Handle, selGetGeneralProperty_Parameter_Extra_Handle, property, parameter, extra);
+				}
 			} else {
-				return (nint) global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_int_IntPtr_IntPtr (this.SuperHandle, selGetGeneralProperty_Parameter_Extra_Handle, property, (IntPtr) parameter, (IntPtr) extra);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSendSuper_int_nint_nint (this.SuperHandle, selGetGeneralProperty_Parameter_Extra_Handle, property, parameter, extra);
+				} else {
+					return global::Scintilla.XamMac2.Messaging.nint_objc_msgSendSuper_int_nint_nint (this.SuperHandle, selGetGeneralProperty_Parameter_Extra_Handle, property, parameter, extra);
+				}
 			}
 		}
+		
 		[Export ("getStringProperty:parameter:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual string GetStringProperty (int property, nint parameter)
 		{
 			if (IsDirectBinding) {
-				return CFString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_int_IntPtr (this.Handle, selGetStringProperty_Parameter_Handle, property, (IntPtr) parameter))!;
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return NSString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_int_nint (this.Handle, selGetStringProperty_Parameter_Handle, property, parameter));
+				} else {
+					return NSString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_int_nint (this.Handle, selGetStringProperty_Parameter_Handle, property, parameter));
+				}
 			} else {
-				return CFString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_int_IntPtr (this.SuperHandle, selGetStringProperty_Parameter_Handle, property, (IntPtr) parameter))!;
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return NSString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_int_nint (this.SuperHandle, selGetStringProperty_Parameter_Handle, property, parameter));
+				} else {
+					return NSString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_int_nint (this.SuperHandle, selGetStringProperty_Parameter_Handle, property, parameter));
+				}
 			}
 		}
+		
 		[Export ("message:wParam:lParam:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual global::System.IntPtr Message (uint message, global::System.IntPtr wParam, global::System.IntPtr lParam)
 		{
 			if (IsDirectBinding) {
-				return global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_UInt32_IntPtr_IntPtr (this.Handle, selMessage_WParam_LParam_Handle, message, wParam, lParam);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_UInt32_IntPtr_IntPtr (this.Handle, selMessage_WParam_LParam_Handle, message, wParam, lParam);
+				} else {
+					return global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend_UInt32_IntPtr_IntPtr (this.Handle, selMessage_WParam_LParam_Handle, message, wParam, lParam);
+				}
 			} else {
-				return global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_UInt32_IntPtr_IntPtr (this.SuperHandle, selMessage_WParam_LParam_Handle, message, wParam, lParam);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					return global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_UInt32_IntPtr_IntPtr (this.SuperHandle, selMessage_WParam_LParam_Handle, message, wParam, lParam);
+				} else {
+					return global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper_UInt32_IntPtr_IntPtr (this.SuperHandle, selMessage_WParam_LParam_Handle, message, wParam, lParam);
+				}
 			}
 		}
+		
 		[Export ("setColorProperty:parameter:value:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual void SetColorProperty (int property, nint parameter, global::AppKit.NSColor value)
 		{
-			var value__handle__ = value!.GetNonNullHandle (nameof (value));
+			var value__handle__ = value.GetNonNullHandle (nameof (value));
 			if (IsDirectBinding) {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_IntPtr_IntPtr (this.Handle, selSetColorProperty_Parameter_Value_Handle, property, (IntPtr) parameter, value__handle__);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_IntPtr (this.Handle, selSetColorProperty_Parameter_Value_Handle, property, parameter, value__handle__);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_IntPtr (this.Handle, selSetColorProperty_Parameter_Value_Handle, property, parameter, value__handle__);
+				}
 			} else {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_IntPtr_IntPtr (this.SuperHandle, selSetColorProperty_Parameter_Value_Handle, property, (IntPtr) parameter, value__handle__);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_IntPtr (this.SuperHandle, selSetColorProperty_Parameter_Value_Handle, property, parameter, value__handle__);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_IntPtr (this.SuperHandle, selSetColorProperty_Parameter_Value_Handle, property, parameter, value__handle__);
+				}
 			}
 		}
+		
 		[Export ("setColorProperty:parameter:fromHTML:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual void SetColorProperty (int property, nint parameter, string fromHTML)
 		{
-			if (fromHTML is null)
+			if (fromHTML == null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (fromHTML));
-			var nsfromHTML = CFString.CreateNative (fromHTML);
+			var nsfromHTML = NSString.CreateNative (fromHTML);
+			
 			if (IsDirectBinding) {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_IntPtr_IntPtr (this.Handle, selSetColorProperty_Parameter_FromHTML_Handle, property, (IntPtr) parameter, nsfromHTML);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_IntPtr (this.Handle, selSetColorProperty_Parameter_FromHTML_Handle, property, parameter, nsfromHTML);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_IntPtr (this.Handle, selSetColorProperty_Parameter_FromHTML_Handle, property, parameter, nsfromHTML);
+				}
 			} else {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_IntPtr_IntPtr (this.SuperHandle, selSetColorProperty_Parameter_FromHTML_Handle, property, (IntPtr) parameter, nsfromHTML);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_IntPtr (this.SuperHandle, selSetColorProperty_Parameter_FromHTML_Handle, property, parameter, nsfromHTML);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_IntPtr (this.SuperHandle, selSetColorProperty_Parameter_FromHTML_Handle, property, parameter, nsfromHTML);
+				}
 			}
-			CFString.ReleaseNative (nsfromHTML);
+			NSString.ReleaseNative (nsfromHTML);
+			
 		}
+		
 		[Export ("setGeneralProperty:parameter:value:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual void SetGeneralProperty (int property, nint parameter, nint value)
 		{
 			if (IsDirectBinding) {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_IntPtr_IntPtr (this.Handle, selSetGeneralProperty_Parameter_Value_Handle, property, (IntPtr) parameter, (IntPtr) value);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_nint (this.Handle, selSetGeneralProperty_Parameter_Value_Handle, property, parameter, value);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_nint (this.Handle, selSetGeneralProperty_Parameter_Value_Handle, property, parameter, value);
+				}
 			} else {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_IntPtr_IntPtr (this.SuperHandle, selSetGeneralProperty_Parameter_Value_Handle, property, (IntPtr) parameter, (IntPtr) value);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_nint (this.SuperHandle, selSetGeneralProperty_Parameter_Value_Handle, property, parameter, value);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_nint (this.SuperHandle, selSetGeneralProperty_Parameter_Value_Handle, property, parameter, value);
+				}
 			}
 		}
+		
 		[Export ("setGeneralProperty:value:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual void SetGeneralProperty (int property, nint value)
 		{
 			if (IsDirectBinding) {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_IntPtr (this.Handle, selSetGeneralProperty_Value_Handle, property, (IntPtr) value);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint (this.Handle, selSetGeneralProperty_Value_Handle, property, value);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint (this.Handle, selSetGeneralProperty_Value_Handle, property, value);
+				}
 			} else {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_IntPtr (this.SuperHandle, selSetGeneralProperty_Value_Handle, property, (IntPtr) value);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint (this.SuperHandle, selSetGeneralProperty_Value_Handle, property, value);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint (this.SuperHandle, selSetGeneralProperty_Value_Handle, property, value);
+				}
 			}
 		}
+		
 		[Export ("setReferenceProperty:parameter:value:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual void SetReferenceProperty (int property, nint parameter, global::System.IntPtr value)
 		{
 			if (IsDirectBinding) {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_IntPtr_IntPtr (this.Handle, selSetReferenceProperty_Parameter_Value_Handle, property, (IntPtr) parameter, value);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_IntPtr (this.Handle, selSetReferenceProperty_Parameter_Value_Handle, property, parameter, value);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_IntPtr (this.Handle, selSetReferenceProperty_Parameter_Value_Handle, property, parameter, value);
+				}
 			} else {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_IntPtr_IntPtr (this.SuperHandle, selSetReferenceProperty_Parameter_Value_Handle, property, (IntPtr) parameter, value);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_IntPtr (this.SuperHandle, selSetReferenceProperty_Parameter_Value_Handle, property, parameter, value);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_IntPtr (this.SuperHandle, selSetReferenceProperty_Parameter_Value_Handle, property, parameter, value);
+				}
 			}
 		}
+		
 		[Export ("setStringProperty:parameter:value:")]
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual void SetStringProperty (int property, nint parameter, string value)
 		{
-			if (value is null)
+			if (value == null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (value));
-			var nsvalue = CFString.CreateNative (value);
+			var nsvalue = NSString.CreateNative (value);
+			
 			if (IsDirectBinding) {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_IntPtr_IntPtr (this.Handle, selSetStringProperty_Parameter_Value_Handle, property, (IntPtr) parameter, nsvalue);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_IntPtr (this.Handle, selSetStringProperty_Parameter_Value_Handle, property, parameter, nsvalue);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_int_nint_IntPtr (this.Handle, selSetStringProperty_Parameter_Value_Handle, property, parameter, nsvalue);
+				}
 			} else {
-				global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_IntPtr_IntPtr (this.SuperHandle, selSetStringProperty_Parameter_Value_Handle, property, (IntPtr) parameter, nsvalue);
+				if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_IntPtr (this.SuperHandle, selSetStringProperty_Parameter_Value_Handle, property, parameter, nsvalue);
+				} else {
+					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_int_nint_IntPtr (this.SuperHandle, selSetStringProperty_Parameter_Value_Handle, property, parameter, nsvalue);
+				}
 			}
-			CFString.ReleaseNative (nsvalue);
+			NSString.ReleaseNative (nsvalue);
+			
 		}
+		
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual global::AppKit.NSScrollView ScrollView {
 			[Export ("scrollView")]
 			get {
-				global::AppKit.NSScrollView? ret;
+				global::AppKit.NSScrollView ret;
 				if (IsDirectBinding) {
-					ret =  Runtime.GetNSObject<global::AppKit.NSScrollView> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend (this.Handle, selScrollViewHandle))!;
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						ret =  Runtime.GetNSObject<global::AppKit.NSScrollView> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend (this.Handle, selScrollViewHandle));
+					} else {
+						ret =  Runtime.GetNSObject<global::AppKit.NSScrollView> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend (this.Handle, selScrollViewHandle));
+					}
 				} else {
-					ret =  Runtime.GetNSObject<global::AppKit.NSScrollView> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper (this.SuperHandle, selScrollViewHandle))!;
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						ret =  Runtime.GetNSObject<global::AppKit.NSScrollView> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper (this.SuperHandle, selScrollViewHandle));
+					} else {
+						ret =  Runtime.GetNSObject<global::AppKit.NSScrollView> (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper (this.SuperHandle, selScrollViewHandle));
+					}
 				}
 				return ret!;
 			}
+			
 		}
+		
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual string Text {
 			[Export ("string")]
 			get {
 				if (IsDirectBinding) {
-					return CFString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend (this.Handle, selStringHandle))!;
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						return NSString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend (this.Handle, selStringHandle));
+					} else {
+						return NSString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend (this.Handle, selStringHandle));
+					}
 				} else {
-					return CFString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper (this.SuperHandle, selStringHandle))!;
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						return NSString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper (this.SuperHandle, selStringHandle));
+					} else {
+						return NSString.FromHandle (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper (this.SuperHandle, selStringHandle));
+					}
 				}
 			}
+			
 			[Export ("setString:")]
 			set {
-				if (value is null)
+				if (value == null)
 					ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (value));
-				var nsvalue = CFString.CreateNative (value);
+				var nsvalue = NSString.CreateNative (value);
+				
 				if (IsDirectBinding) {
-					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_IntPtr (this.Handle, selSetString_Handle, nsvalue);
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						global::Scintilla.XamMac2.Messaging.void_objc_msgSend_IntPtr (this.Handle, selSetString_Handle, nsvalue);
+					} else {
+						global::Scintilla.XamMac2.Messaging.void_objc_msgSend_IntPtr (this.Handle, selSetString_Handle, nsvalue);
+					}
 				} else {
-					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_IntPtr (this.SuperHandle, selSetString_Handle, nsvalue);
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_IntPtr (this.SuperHandle, selSetString_Handle, nsvalue);
+					} else {
+						global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_IntPtr (this.SuperHandle, selSetString_Handle, nsvalue);
+					}
 				}
-				CFString.ReleaseNative (nsvalue);
+				NSString.ReleaseNative (nsvalue);
+				
 			}
 		}
+		
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		object? __mt_WeakDelegate_var;
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		public virtual NSObject? WeakDelegate {
 			[Export ("delegate", ArgumentSemantic.UnsafeUnretained)]
 			get {
-				NSObject? ret;
+				NSObject ret;
 				if (IsDirectBinding) {
-					ret = Runtime.GetNSObject (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend (this.Handle, selDelegateHandle))!;
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						ret = Runtime.GetNSObject (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend (this.Handle, selDelegateHandle));
+					} else {
+						ret = Runtime.GetNSObject (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSend (this.Handle, selDelegateHandle));
+					}
 				} else {
-					ret = Runtime.GetNSObject (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper (this.SuperHandle, selDelegateHandle))!;
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						ret = Runtime.GetNSObject (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper (this.SuperHandle, selDelegateHandle));
+					} else {
+						ret = Runtime.GetNSObject (global::Scintilla.XamMac2.Messaging.IntPtr_objc_msgSendSuper (this.SuperHandle, selDelegateHandle));
+					}
 				}
 				MarkDirty ();
 				__mt_WeakDelegate_var = ret;
 				return ret!;
 			}
+			
 			[Export ("setDelegate:", ArgumentSemantic.UnsafeUnretained)]
 			set {
 				var value__handle__ = value.GetHandle ();
 				if (IsDirectBinding) {
-					global::Scintilla.XamMac2.Messaging.void_objc_msgSend_IntPtr (this.Handle, selSetDelegate_Handle, value__handle__);
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						global::Scintilla.XamMac2.Messaging.void_objc_msgSend_IntPtr (this.Handle, selSetDelegate_Handle, value__handle__);
+					} else {
+						global::Scintilla.XamMac2.Messaging.void_objc_msgSend_IntPtr (this.Handle, selSetDelegate_Handle, value__handle__);
+					}
 				} else {
-					global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_IntPtr (this.SuperHandle, selSetDelegate_Handle, value__handle__);
+					if (global::ObjCRuntime.Runtime.IsARM64CallingConvention) {
+						global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_IntPtr (this.SuperHandle, selSetDelegate_Handle, value__handle__);
+					} else {
+						global::Scintilla.XamMac2.Messaging.void_objc_msgSendSuper_IntPtr (this.SuperHandle, selSetDelegate_Handle, value__handle__);
+					}
 				}
 				MarkDirty ();
 				__mt_WeakDelegate_var = value;
 			}
 		}
+		
 		[BindingImpl (BindingImplOptions.GeneratedCode | BindingImplOptions.Optimizable)]
 		protected override void Dispose (bool disposing)
 		{
