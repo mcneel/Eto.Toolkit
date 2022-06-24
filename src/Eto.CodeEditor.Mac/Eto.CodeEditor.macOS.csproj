@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <UseXamarinMac>True</UseXamarinMac>
+    <TargetFramework>net6.0-macos</TargetFramework>
+    <TargetFrameworks>net6.0-macos;net6.0</TargetFrameworks>
+    
+    <RootNamespace>Eto.CodeEditor</RootNamespace>
+    <DefineConstants>$(DefineConstants);OSX</DefineConstants>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Eto.CodeEditor.macOS</PackageId>
+    <Title>Eto.CodeEditor adapter for Eto.macOS</Title>
+    <Description>This is the macOS implementation of Eto.CodeEditor.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\common\*.cs" Link="common\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Eto.Platform.macOS" Version="2.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Eto.CodeEditor\Eto.CodeEditor.csproj" />
+    <ProjectReference Include="..\Scintilla.Mac\Scintilla.macOS.csproj" Pack="True" />
+  </ItemGroup>
+  
+</Project>

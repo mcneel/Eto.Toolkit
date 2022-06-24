@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <UseXamarinMac>True</UseXamarinMac>
-    <TargetFrameworks>net6.0-macos;net462</TargetFrameworks>    <TargetFrameworks Condition="$(HasXamarinMac) == 'True'">$(TargetFrameworks);xamarinmac20</TargetFrameworks>
+    <TargetFrameworks>net6.0-macos;net462</TargetFrameworks>
+    <TargetFrameworks Condition="$(HasXamarinMac) == 'True'">$(TargetFrameworks);xamarinmac20</TargetFrameworks>
     
     <RootNamespace>Eto.CodeEditor</RootNamespace>
     <DefineConstants>$(DefineConstants);OSX</DefineConstants>
@@ -25,7 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Eto.CodeEditor\Eto.CodeEditor.csproj" />
-    <ProjectReference Include="..\Scintilla.XamMac2\Scintilla.XamMac2.csproj" Pack="True" />
+    <ProjectReference Include="..\Scintilla.Mac\Scintilla.XamMac2.csproj" Pack="True" />
   </ItemGroup>
 
   <Import Project="..\..\build\Xamarin.Mac.targets" Condition="$(TargetFramework) == 'net45'" />

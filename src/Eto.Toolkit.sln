@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeEditor", "CodeEditor", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eto.CodeEditor.TestApp.Wpf", "..\test\Eto.CodeEditor.TestApp.Wpf\Eto.CodeEditor.TestApp.Wpf.csproj", "{2BF83FDA-9BFF-4A1E-8C58-1EAC435DEED6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scintilla.XamMac2", "Scintilla.XamMac2\Scintilla.XamMac2.csproj", "{810B1BCD-8E09-4F69-8726-B6ED91E243E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scintilla.XamMac2", "Scintilla.Mac\Scintilla.XamMac2.csproj", "{810B1BCD-8E09-4F69-8726-B6ED91E243E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eto.CodeEditor.TestApp.XamMac2", "..\test\Eto.CodeEditor.TestApp.Mac\Eto.CodeEditor.TestApp.XamMac2.csproj", "{DD626F6E-2487-41A7-8D97-B3F673EC117B}"
 EndProject
