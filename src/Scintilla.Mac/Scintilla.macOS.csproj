@@ -3,7 +3,7 @@
   <PropertyGroup>
     <UseXamarinMacBinding>True</UseXamarinMacBinding>
     <IsBindingProject>True</IsBindingProject>
-    <TargetFrameworks>net6.0-macos;net45</TargetFrameworks> <!-- Bindings projects only support net45.. -->
+    <TargetFrameworks>net7.0-macos;net45</TargetFrameworks> <!-- Bindings projects only support net45.. -->
     <TargetFrameworks Condition="$(HasXamarinMac) == 'True'">$(TargetFrameworks);xamarinmac20</TargetFrameworks>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <IsPackable>False</IsPackable>

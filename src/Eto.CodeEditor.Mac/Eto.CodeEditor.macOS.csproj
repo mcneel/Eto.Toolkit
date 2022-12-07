@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <UseXamarinMac>True</UseXamarinMac>
-    <TargetFramework>net6.0-macos</TargetFramework>
-    <TargetFrameworks>net6.0-macos;net6.0</TargetFrameworks>
+    <TargetFramework>net7.0-macos</TargetFramework>
+    <TargetFrameworks>net7.0-macos;net7.0</TargetFrameworks>
     
     <RootNamespace>Eto.CodeEditor</RootNamespace>
     <DefineConstants>$(DefineConstants);OSX</DefineConstants>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);CS8981</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>

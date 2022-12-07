@@ -3,7 +3,7 @@
   <PropertyGroup>
     <UseXamarinMac>True</UseXamarinMac>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net6.0-macos</TargetFrameworks>
+    <TargetFrameworks>net7.0-macos</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
