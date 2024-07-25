@@ -3,7 +3,6 @@
   <PropertyGroup>
     <UseXamarinMac>True</UseXamarinMac>
     <TargetFramework>net7.0-macos</TargetFramework>
-    <TargetFrameworks>net7.0-macos;net7.0</TargetFrameworks>
     
     <RootNamespace>Eto.CodeEditor</RootNamespace>
     <DefineConstants>$(DefineConstants);OSX</DefineConstants>
